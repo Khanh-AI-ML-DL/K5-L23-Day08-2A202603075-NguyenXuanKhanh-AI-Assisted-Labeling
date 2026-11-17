@@ -18,7 +18,7 @@
   ```
   `yoloe_all` đứng trước nên box three_wheeler thắng box car/truck của YOLO26 khi chồng nhau (IoU >= 0.6).
 - **Phiên bản SAM bạn chọn** (SAM 1 / 2.1 / 3) và lý do: đã thử SAM 2.1 (`sam2.1_b.pt`) ở `t_sam`: 16/16 box có mask nhưng chậm, 2.81 s/ảnh so với 0.62 s/ảnh của YOLO26 thường (gấp ≈ 4.5 lần), chỉ chạy 2 ảnh. Phiên bản chốt cho Part 5 và lý do (chất lượng mask, RAM, quyền truy cập): 
-- Lỗi nào **không sửa được bằng đổi ngưỡng** (ví dụ tuk-tuk bị gọi `car`)? Sửa thế nào? <<>> (gợi ý để đối chiếu: ở bước duyệt có 5 trường hợp đổi lớp, xem mục 2)
+- Lỗi nào **không sửa được bằng đổi ngưỡng** (ví dụ tuk-tuk bị gọi `car`)? Sửa thế nào? (gợi ý để đối chiếu: ở bước duyệt có 5 trường hợp đổi lớp, xem mục 2)
 - Box **điểm cao mà sai** hoặc **điểm thấp mà đúng** (ảnh nào): 
 - Giới hạn: ngưỡng được chọn và chấm trên cùng 4 ảnh gold, nên precision/recall của máy trên gold là con số lạc quan (in-sample). Chỉ 4 ảnh nên ngưỡng là ước lượng thô; lớp ít vật cho kết luận yếu (three_wheeler 7 vật, bicycle 8, car 9). Ngưỡng 0.15 của three_wheeler chỉ dựa trên 7 vật nên có thể không giữ được trên tập lớn hơn.
 
@@ -34,7 +34,7 @@ Ngưỡng accepted: IoU >= 0.9. Đã loại 27 đối tượng nằm quanh các 
 | added | 10 | 1.9% | 517 đối tượng sau duyệt |
 
 - Trong số deleted + added có **5 trường hợp đổi lớp** (máy gán sai lớp, box đúng chỗ), không phải máy bỏ sót. Số vật máy **sót thật** ≈ added − đổi lớp = 10 − 5 = 5.
-- Lớp nào máy tệ nhất? **three_wheeler**: bị xoá 7 trên 37 box máy (30 accepted + 7 deleted) = 18.9%, cao nhất trong các lớp có đủ mẫu (person 1/272 = 0.4%, motorbike 0/139, car 0/54). truck (2/6 = 33%) và bus (1/3) có tỉ lệ cao hơn nhưng chỉ 6 và 3 box nên không đủ để kết luận. Về bỏ sót, **car** có added nhiều nhất (4). Ảnh ví dụ: <<img_0xx>>. Nguyên nhân (đối chiếu: three_wheeler bị xoá nhiều trong khi car được thêm nhiều có thể là ba-gác bị gọi nhầm `car`, bạn cần nhìn ảnh để xác nhận): <<>>
+- Lớp nào máy tệ nhất? **three_wheeler**: bị xoá 7 trên 37 box máy (30 accepted + 7 deleted) = 18.9%, cao nhất trong các lớp có đủ mẫu (person 1/272 = 0.4%, motorbike 0/139, car 0/54). truck (2/6 = 33%) và bus (1/3) có tỉ lệ cao hơn nhưng chỉ 6 và 3 box nên không đủ để kết luận. Về bỏ sót, **car** có added nhiều nhất (4).  Nguyên nhân (đối chiếu: three_wheeler bị xoá nhiều trong khi car được thêm nhiều có thể là ba-gác bị gọi nhầm `car`, bạn cần nhìn ảnh để xác nhận): 
 - So với gold: precision / recall của **máy** = 66.2% (KTC 95%: 55–76%) / 68.1% (KTC 95%: 57–78%). TP 49, FP 25, FN 23. Mẫu số: 72 đối tượng gold (recall), 74 box máy (precision). Lạc quan vì ngưỡng chọn trên chính 4 ảnh này; đọc khoảng tin cậy, không đọc con số đơn.
 
 ### Theo lớp
@@ -67,9 +67,9 @@ Ba quy tắc giảm thiên kiến đề xuất cho lần duyệt lại:1. Quét 
 
  | Ảnh | SAM (phiên bản) | Số click | Mask gồm người lái / hàng hoá? | Lỗi quan sát | File trong `masks/` |
 |---|---|---|---|---|---|
-| img_013 (tuk-tuk) | SAM 2.1 (`sam2.1_b.pt`) | 3 (2 pos + 1 neg), chạy 1 lần | có / không gồm người lái; có / không gồm hàng hoá>> | Mask 317.255 px (45.4% ảnh), 1 polygon. Đã mở ra kiểm tra, mask ôm đúng vật, không tràn ra nền. Diện tích lớn vì xe chụp cận cảnh. <<lỗi khác nếu có, ví dụ thiếu mui / bánh>> | `submission/masks/tuktuk_img013.jpg` |
-| img_004 (tuk-tuk) | SAM 2.1 (`sam2.1_b.pt`) | 3 (2 pos + 1 neg), chạy 1 lần | có / không gồm người lái; có / không gồm hàng hoá>> | Mask 93.190 px (13.3% ảnh), 1 polygon. <<lỗi quan sát sau khi mở mask: tràn nền, thiếu phần nào>> | `submission/masks/tuktuk_img004_sam2.jpg` |
-| img_017 (tuk-tuk) | SAM 2.1 (`sam2.1_b.pt`) | 3 (2 pos + 1 neg), chạy 1 lần | có / không gồm người lái; có / không gồm hàng hoá>> | Mask 84.532 px (12.1% ảnh), 1 polygon. <<lỗi quan sát sau khi mở mask: tràn nền, thiếu phần nào>> | `submission/masks/tuktuk_img017_sam2.jpg` |
+| img_013 (tuk-tuk) | SAM 2.1 (`sam2.1_b.pt`) | 3 (2 pos + 1 neg), chạy 1 lần | có / không gồm người lái; có / không gồm hàng hoá>> | Mask 317.255 px (45.4% ảnh), 1 polygon. Đã mở ra kiểm tra, mask ôm đúng vật, không tràn ra nền. Diện tích lớn vì xe chụp cận cảnh. lỗi khác nếu có, ví dụ thiếu mui / bánh| `submission/masks/tuktuk_img013.jpg` |
+| img_004 (tuk-tuk) | SAM 2.1 (`sam2.1_b.pt`) | 3 (2 pos + 1 neg), chạy 1 lần | có / không gồm người lái; có / không gồm hàng hoá | Mask 93.190 px (13.3% ảnh), 1 polygon. lỗi quan sát sau khi mở mask: tràn nền, thiếu phần nào| `submission/masks/tuktuk_img004_sam2.jpg` |
+| img_017 (tuk-tuk) | SAM 2.1 (`sam2.1_b.pt`) | 3 (2 pos + 1 neg), chạy 1 lần | có / không gồm người lái; có / không gồm hàng hoá | Mask 84.532 px (12.1% ảnh), 1 polygon. lỗi quan sát sau khi mở mask: tràn nền, thiếu phần nào | `submission/masks/tuktuk_img017_sam2.jpg` |
  
 Cả 3 vật dùng cùng SAM 2.1 và cùng số click (3), mỗi lần chạy 1 lần ra 1 polygon. Lệnh đã dùng:
  
