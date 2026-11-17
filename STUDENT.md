@@ -2,12 +2,12 @@
 
 - Họ và tên: Nguyễn Xuân Khánh
 - MSHV: 2A202603075
-- Lớp (L2 / L3 / khác): <<L2 / L3>>
+- Lớp (L2 / L3 / khác): L2
 - Tài khoản GitHub: Khanh-AI-ML-DL
 - Repo bài nộp (URL): https://github.com/Khanh-AI-ML-DL/K5-L23-Day08-2A202603075-NguyenXuanKhanh-AI-Assisted-Labeling
-- Commit chốt bài (hash): <<chạy `git rev-parse HEAD` sau khi commit>>
+- Commit chốt bài (hash): https://github.com/Khanh-AI-ML-DL/K5-L23-Day08-2A202603075-NguyenXuanKhanh-AI-Assisted-Labeling
 - Máy: macOS (MacBook Air), GPU: MPS (Apple Silicon)
-- CVAT (Docker): <<phiên bản, ví dụ v2.81.0>>
+- CVAT (Docker): Localhost
 
 ## Kết quả tóm tắt (điền cuối bài; số lấy từ `submission/qc/*`, kèm mẫu số)
 
