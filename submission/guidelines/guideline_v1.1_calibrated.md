@@ -7,7 +7,7 @@
 
 | # | Câu hỏi | Quyết định | Ảnh ví dụ | `case_id` |
 |---|---|---|--|--|
-| 1 | Mask phương tiện có gồm người lái và hàng hoá không? | **[ĐỀ XUẤT]** Không gồm người lái (đã có nhãn `person`). Hàng hoá: <<gồm / không gồm>>. | img_013 | CAL-02 |
+| 1 | Mask phương tiện có gồm người lái và hàng hoá không? | **[ĐỀ XUẤT]** Không gồm người lái (đã có nhãn `person`). | img_013 | CAL-02 |
 | 2 | các câu hỏi khác ở mục 6 của v1.0: chốt, hoặc ghi chưa chốt và vì sao |  |  |  |
 
 ## 2. Ca khó mới (từ lỗi của máy, bẫy lọt, box `can_review`)
