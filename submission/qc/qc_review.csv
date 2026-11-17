@@ -1,0 +1,13 @@
+image,object_id,error_type,reviewer,note
+img_003.jpg,10,sai vị trí/kích thước,2A202603075,"three_wheeler 0.90: box lấn sang phải khỏi thùng xe khoảng 35 px, ôm lỏng (nghi trùng bẫy loose đã lọt, theo review_stats). [xác nhận bằng ảnh]"
+img_003.jpg,8,thừa,2A202603075,three_wheeler 0.21: box thứ hai chồng lên cùng một xe với #10; một xe chỉ nên có một box.
+img_003.jpg,11,thừa,2A202603075,three_wheeler 0.80: box thứ ba chồng lên cùng xe với #10 và #8. Giữ lại một box ôm sát. [xác nhận box nào giữ]
+img_003.jpg,7,thừa,2A202603075,three_wheeler 0.20 quanh người phụ nữ váy cam và xe máy đỗ: không thấy xe ba bánh.
+img_003.jpg,6,thừa,2A202603075,"three_wheeler 0.18 ở mép trái ảnh: không thấy xe ba bánh. [nghi, xác nhận]"
+img_006.jpg,82,thừa,2A202603075,"car 0.55 ở cuối ngõ hẹp: không thấy ô tô rõ ràng. [nghi, xác nhận]"
+img_006.jpg,,bỏ sót,2A202603075,"Hàng xe máy đỗ bên trái có nhiều xe hơn số box (3 box chồng nhau cho khoảng 4-5 xe). [nghi, đếm lại trên ảnh gốc]"
+img_014.jpg,,,,"Không thấy lỗi rõ trên ảnh overlay. Lưu ý: review_stats ghi bẫy `missing` đã lọt ở ảnh này, cần đối chiếu sau khi mở traps_key."
+img_031.jpg,455,sai vị trí/kích thước,2A202603075,"person 0.79: box dừng ở khoảng y=437, thiếu nửa thân dưới và chân (người thấy tới khoảng y=680 sau xe đạp)."
+img_035.jpg,522,thừa,2A202603075,"three_wheeler 0.38: trùng với #521, cùng một xích lô."
+img_035.jpg,521,sai vị trí/kích thước,2A202603075,"three_wheeler 0.49: box cao hơn xích lô (đỉnh khoảng y=412), ôm lỏng. [xác nhận]"
+img_035.jpg,499,thừa,2A202603075,person 0.36: trùng với #523 (cùng một người ở mép trái ảnh).
